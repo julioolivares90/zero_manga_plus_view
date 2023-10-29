@@ -25,6 +25,9 @@ MaterialColor getColor(String demography){
     return Colors.red;
   }
   if(demography == "Shoujo"){
+    return Colors.pink;
+  }
+  if(demography == "Josei"){
     return Colors.deepPurple;
   }
   return  Colors.amber;

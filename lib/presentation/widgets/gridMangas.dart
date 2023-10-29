@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zero_manga_plus_view/presentation/widgets/book_type.dart';
 import 'package:zero_manga_plus_view/presentation/widgets/text_demography.dart';
 
 import '../../data/datastore/model/mangas_populares.dart';
@@ -7,7 +8,7 @@ import '../../data/datastore/util/Util.dart';
 Widget GridMangas(List<Mangas> mangas) {
   return GridView.builder(
       gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
       scrollDirection: Axis.horizontal,
       itemCount: mangas.length,
       itemBuilder: (context, index) {
@@ -43,7 +44,9 @@ Widget GridMangas(List<Mangas> mangas) {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    color: Colors.black.withOpacity(0.2),
+                    padding: const EdgeInsets.only(left: 10,top: 0,right: 10,bottom: 0),
+                    color: Colors.black.withOpacity(0.5),
+                    height: 45,
                     child: ListTile(
                       title: Text(
                         manga.title ?? "",
@@ -56,16 +59,26 @@ Widget GridMangas(List<Mangas> mangas) {
                       ),
                     ),
                   ),
-                  const Row(
+                   Row(
                     children: [
-                      Text(
-                        'value 1',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Spacer(),
-                      Text(
-                        'value 2',
-                        style: TextStyle(color: Colors.white),
+                     bookType(manga.type!),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.only(left: 0,top: 0,right: 10,bottom: 0),
+                        color: Colors.black.withOpacity(0.5),
+                        child: Row(
+                          children: [
+                            Text(
+                              manga.score!,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            const Icon(
+                              Icons.star, // El ícono que deseas agregar
+                              color: Colors.yellow, // Color del ícono
+                              size: 20.0, // Tamaño del ícono
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
