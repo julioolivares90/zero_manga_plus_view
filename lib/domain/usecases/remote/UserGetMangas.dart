@@ -1,6 +1,7 @@
 import 'package:zero_manga_plus_view/core/usecases/use_case.dart';
 import 'package:zero_manga_plus_view/data/datastore/model/response.dart';
 
+import '../../../data/datastore/remote/ApiService.dart';
 import '../../repository/ApiService.dart';
 
 class UserGetMangas extends UseCase{
