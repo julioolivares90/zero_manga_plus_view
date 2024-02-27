@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:zero_manga_plus_view/data/datastore/model/response.dart';
+import 'package:zero_manga_plus_view/data/datastore/model/response_capitulos.dart';
 import 'package:zero_manga_plus_view/domain/repository/ApiService.dart';
 
 import '../model/response_detail.dart';
@@ -49,4 +52,27 @@ class ApiServiceImplementation extends ApiService {
     }
     return ResponseDatail();
  }
+
+  @override
+  Future<ResponseCapitulos> GetCapitulos(String urlRefer, String urlCapitulo) async {
+      var url = "$BASE_URL$MANGA_CAPITULOS?urlRefer=${urlRefer.trim()}&urlCapitulo=$urlCapitulo";
+
+      print(url);
+      var urlFinal = Uri.parse(url);
+
+      var response = await http.get(urlFinal);
+
+      if(response.statusCode == 200){
+        var jsonResponse = convert.jsonDecode(response.body) as Map<String,dynamic>;
+
+        var responseCapitulos = ResponseCapitulos.fromJson(jsonResponse);
+        if(responseCapitulos != null){
+          return responseCapitulos;
+        }
+        else {
+          return ResponseCapitulos();
+        }
+      }
+      return ResponseCapitulos();
+  }
 }

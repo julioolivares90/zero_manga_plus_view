@@ -21,7 +21,6 @@ class DetailManga extends ConsumerWidget {
             data: (detailResponse) => Padding(
                   padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
                   child: Column(
-
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -59,52 +58,56 @@ class DetailManga extends ConsumerWidget {
                           ],
                         ),
                       ),
-                     Flexible(child:  Container(
-                       margin: const EdgeInsets.symmetric(vertical: 0,horizontal: 0),
-                       child: SizedBox(
-                         width: 400,
-                         height: 100,
-                         child: GridView.builder(
-                           padding: const EdgeInsets.all(0),
-                           scrollDirection: Axis.vertical,
-                           gridDelegate:
-                           const SliverGridDelegateWithFixedCrossAxisCount(
-                               crossAxisCount: 3, childAspectRatio: 3.0),
-                           itemCount: detailResponse.data!.generos!.length,
-                           itemBuilder: (context, index) {
-                             return Padding(
-                               padding: const EdgeInsets.all(8.0),
-                               child: Container(
-                                 clipBehavior: Clip.antiAlias,
-                                 width: 20,
-                                 height: 20,
-                                 decoration: BoxDecoration(
-                                     color: Colors.deepPurple.shade800,
-                                     borderRadius: BorderRadius.circular(10),
-                                     boxShadow: [
-                                       BoxShadow(
-                                           color: Colors.black.withOpacity(1),
-                                           blurRadius: 5,
-                                           offset: const Offset(0, 3))
-                                     ]),
-                                 child: Container(
-                                   alignment: Alignment.center,
-                                   padding: const EdgeInsets.all(0),
-                                   child: Text(
-                                     detailResponse.data!.generos![index],
-                                     style: const TextStyle(
-                                         color: Colors.white,
-                                         overflow: TextOverflow.ellipsis,
-                                         fontSize: 12,
-                                         fontStyle: FontStyle.normal),
-                                   ),
-                                 ),
-                               ),
-                             );
-                           },
-                         ),
-                       ),
-                     ),),
+                      Flexible(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 0),
+                          child: SizedBox(
+                            width: 400,
+                            height: 100,
+                            child: GridView.builder(
+                              padding: const EdgeInsets.all(0),
+                              scrollDirection: Axis.vertical,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3, childAspectRatio: 3.0),
+                              itemCount: detailResponse.data!.generos!.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    clipBehavior: Clip.antiAlias,
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                        color: Colors.deepPurple.shade800,
+                                        borderRadius: BorderRadius.circular(10),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(1),
+                                              blurRadius: 5,
+                                              offset: const Offset(0, 3))
+                                        ]),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(0),
+                                      child: Text(
+                                        detailResponse.data!.generos![index],
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            overflow: TextOverflow.ellipsis,
+                                            fontSize: 12,
+                                            fontStyle: FontStyle.normal),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
                       Flexible(
                         child: Container(
                             padding: const EdgeInsets.all(0),
@@ -129,31 +132,40 @@ class DetailManga extends ConsumerWidget {
                             padding: const EdgeInsets.all(10),
                             child: ListView.builder(
                               itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () async{
-                                    await Navigator.push(context,
-                                        MaterialPageRoute(builder: (BuildContext context)=> VisorManga(urlCapitulo: detailResponse.data!.capitulos![index].urlLeer!)
-                                    ));
+                                return
+                                  GestureDetector(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                VisorManga(
+                                                  urlCapitulo: detailResponse
+                                                      .data!
+                                                      .capitulos![index]
+                                                      .urlLeer!,
+                                                  urlRefer: mangaUrl,
+                                                )));
                                   },
                                   child: ListTile(
                                     title: Text(
-                                      detailResponse.data!.capitulos![index].name!,
-                                      style: const TextStyle(color: Colors.white),
+                                      detailResponse
+                                          .data!.capitulos![index].name!,
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
                                   ),
                                 );
                               },
                               itemCount: detailResponse.data!.capitulos!.length,
-
                             ),
                           ),
                         ),
                       )
-
                     ],
                   ),
                 ),
-            error: (_, __) => const Text('No se pudo mostrar informacion'),
+            error: (_, __) => const Text('No se pudo mostrar informacion',style: TextStyle(color: Colors.white),),
             loading: () => const CircularProgressIndicator()),
       ),
     );

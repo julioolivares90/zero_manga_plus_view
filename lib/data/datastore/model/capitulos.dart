@@ -10,9 +10,9 @@ class Capitulos {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['urlLeer'] = this.urlLeer;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['urlLeer'] = urlLeer;
     return data;
   }
 }

@@ -1,8 +1,11 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:injector/injector.dart';
+import 'package:zero_manga_plus_view/data/datastore/model/response_capitulos.dart';
 import 'package:zero_manga_plus_view/data/datastore/model/response_detail.dart';
+import 'package:zero_manga_plus_view/data/datastore/remote/SendCapituloData.dart';
 import 'package:zero_manga_plus_view/domain/usecases/remote/UserGetMangas.dart';
+import 'package:zero_manga_plus_view/domain/usecases/remote/user_get_capitulos.dart';
 import 'package:zero_manga_plus_view/domain/usecases/remote/user_get_detail_manga.dart';
 
 final mangasProvider = FutureProvider.autoDispose((ref)async {
@@ -15,4 +18,10 @@ final mangaDetailProvider = FutureProvider.family<ResponseDatail,String>((ref,ma
   final userGetDetailManga = Injector.appInstance.get<UserGetDetailManga>();
   
   return await userGetDetailManga.call(params: mangaUrl);
+});
+
+final capitulosMangaProvider = FutureProvider.family<ResponseCapitulos,SendCapituloData>((ref,parameters) async {
+  final userGetCapitulos = Injector.appInstance.get<UserGetCapitulos>();
+
+  return await userGetCapitulos.call(params: parameters);
 });
